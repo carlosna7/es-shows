@@ -32,10 +32,10 @@ const AuthProvider = ({ children }) => {
       setSpotifyToken(tokenData.access_token)
 
       // Verifica se o codigo esta sendo executado no navegador antes de acessar o localStorage para evitar erros
-      if (typeof window !== "undefined") {
+      if(typeof window !== "undefined") {
         const userData = localStorage.getItem("userToken")
 
-        if (userData) {
+        if(userData) {
           try {
             const response = await fetch(`https://api-esshow.onrender.com/verify-token`, {
               method: 'POST',
@@ -46,7 +46,7 @@ const AuthProvider = ({ children }) => {
             })
             const data = await response.json()
 
-            if (data.expired) {
+            if(data.expired) {
 
               console.log("Token expirou!")
               localStorage.removeItem('userToken')
@@ -59,9 +59,13 @@ const AuthProvider = ({ children }) => {
               console.log("Token ainda é válido!")
 
             }
-          } catch (error) {
+          } catch(error) {
             console.error('Erro ao verificar a expiração do token:', error)
           }
+        } else {
+          console.log("Token expirou!")
+          localStorage.removeItem('userToken')
+          setUserId(false)
         }
       }
     }
