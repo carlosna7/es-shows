@@ -2,8 +2,11 @@
 
 import RegisterForm from '@/components/form/RegisterForm'
 import React from 'react'
+import { useRouter } from 'next/navigation'
 
 const page = () => {
+
+  const route = useRouter()
 
   // registe rn API
   const registerUser = (user) => {
@@ -20,7 +23,7 @@ const page = () => {
       .then((response) => response.json())
       .then((data) => {
 
-        console.log(data)
+        route.push('/login')
 
       })
       .catch((erro) => {

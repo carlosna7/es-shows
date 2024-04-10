@@ -34,7 +34,7 @@ const Page = () => {
 
   const deleteShow = (id) => {
 
-    fetch(`http://localhost:5000/user/shows/${userId}/${id}`, {
+    fetch(`https://api-esshow.onrender.com/user/shows/${userId}/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
