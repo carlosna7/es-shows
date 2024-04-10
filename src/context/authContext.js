@@ -6,67 +6,68 @@ import { jwtDecode } from "jwt-decode"
 
 const AuthContext = createContext()
 
-// auqi saberemmos se o token de login esta ativo, pois sem ele estar o contexto fara com que o usuario seja deslogador e precise fazer login novamente
+// aqui saberemos se o token de login esta ativo, pois sem ele estar ativo o contexto fara com que o usuario seja deslogado e precise fazer login novamente
 
 const AuthProvider = ({ children }) => {
   const [spotifyToken, setSpotifyToken] = useState('')
+  const [userId, setUserId] = useState('')
 
   const path = usePathname()
 
-  const userData = localStorage.getItem("userToken")
-
-  const [ userId, setUserId] = useState('')
-
   useEffect(() => {
-    const clientId = "752bc423ead34d0e866844e838f72e4e"
-    const clientSecret = "9b8005642b884d28bfba120b16ca9941"
+    const fetchData = async () => {
+      const clientId = "752bc423ead34d0e866844e838f72e4e"
+      const clientSecret = "9b8005642b884d28bfba120b16ca9941"
 
-    fetch("https://accounts.spotify.com/api/token", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      body: `grant_type=client_credentials&client_id=${clientId}&client_secret=${clientSecret}`
-    })
-      .then((response) => response.json())
-      .then((data) => {
-
-        setSpotifyToken(data.access_token)
-
-      })
-      .catch((erro) => {
-        console.log(erro)
+      const tokenResponse = await fetch("https://accounts.spotify.com/api/token", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: `grant_type=client_credentials&client_id=${clientId}&client_secret=${clientSecret}`
       })
 
-    // Função para verificar se o token expirou
-    const checkToken = async () => {
-      try {
-        const response = await fetch(`http://localhost:5000/verify-token`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ token: userData })
-        })
-        const data = await response.json()
+      const tokenData = await tokenResponse.json()
 
-        if (data.expired) {
-          console.log("token expirou!")
-          localStorage.removeItem('userToken')
-          setUserId(false)
+      setSpotifyToken(tokenData.access_token)
 
-        } else {
-          const validToken = jwtDecode(userData)
-          setUserId(validToken.userId)
-          console.log("token ainda é valido!")
+      // Verifica se o codigo esta sendo executado no navegador antes de acessar o localStorage para evitar erros
+      if (typeof window !== "undefined") {
+        const userData = localStorage.getItem("userToken")
+
+        if (userData) {
+          try {
+            const response = await fetch(`http://localhost:5000/verify-token`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({ token: userData })
+            })
+            const data = await response.json()
+
+            if (data.expired) {
+
+              console.log("Token expirou!")
+              localStorage.removeItem('userToken')
+              setUserId(false)
+
+            } else {
+
+              const validToken = jwtDecode(userData)
+              setUserId(validToken.userId)
+              console.log("Token ainda é válido!")
+
+            }
+          } catch (error) {
+            console.error('Erro ao verificar a expiração do token:', error)
+          }
         }
-      } catch (error) {
-        console.error('Erro ao verificar a expiração do token:', error)
       }
     }
 
-    checkToken()
-  }, [path, userData])
+    fetchData()
+  }, [path])
 
   return (
     <AuthContext.Provider value={{ spotifyToken, userId }}>
