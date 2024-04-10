@@ -13,7 +13,7 @@ const UserCard = () => {
 
   useEffect(() => {
     if(userId) {
-      fetch(`http://localhost:5000/user/${userId}`, {
+      fetch(`https://api-esshow.onrender.com/user/${userId}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'

@@ -71,7 +71,7 @@ const Page = () => {
 
     console.log(updateData)
 
-    fetch(`http://localhost:5000/user/shows/${userId}`, {
+    fetch(`https://api-esshow.onrender.com/user/shows/${userId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

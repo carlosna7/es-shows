@@ -10,7 +10,7 @@ const page = () => {
 
     // console.log(user)
 
-    fetch('http://localhost:5000/user/register', {
+    fetch('https://api-esshow.onrender.com/user/register', {
       method: 'POST',
       headers: {
         "Content-Type": "application/json",

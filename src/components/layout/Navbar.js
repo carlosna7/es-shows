@@ -14,7 +14,7 @@ const Navbar = () => {
 	}
 
   return (
-    <header className='z-10 2xl:bg-zinc-900 xl:bg-red-400 lg:bg-blue-300 md:bg-green-400 sm:bg-purple-400 bg-zinc-900 flex justify-between 2xl:px-72 xl:px-52 lg:px-36 sm:px-20 px-8 py-6'>
+    <header className='z-10 bg-zinc-900 flex justify-between 2xl:px-72 xl:px-52 lg:px-36 sm:px-20 px-8 py-6'>
       
       <div className='flex gap-4 items-center'>
         <img 

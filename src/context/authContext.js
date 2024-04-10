@@ -37,7 +37,7 @@ const AuthProvider = ({ children }) => {
 
         if (userData) {
           try {
-            const response = await fetch(`http://localhost:5000/verify-token`, {
+            const response = await fetch(`https://api-esshow.onrender.com/verify-token`, {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json'
