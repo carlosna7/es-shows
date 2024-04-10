@@ -6,7 +6,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { FaSearch } from "react-icons/fa"
 // import { HiAdjustmentsHorizontal } from "react-icons/hi2"
 
-const page = () => {
+const Page = () => {
   const { spotifyToken } = useContext(AuthContext)
   const [artistId, setArtistId] = useState('')
   const [artistData, setArtistData] = useState('')
@@ -125,4 +125,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

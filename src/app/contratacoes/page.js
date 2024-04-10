@@ -4,8 +4,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '@/context/authContext'
 import Link from 'next/link'
 
-const page = () => {
-
+const Page = () => {
   const [shows, setShows] = useState([])
   const { userId } = useContext(AuthContext)
 
@@ -63,12 +62,12 @@ const page = () => {
               <div className='grid 2xl:grid-cols-4 md:grid-cols-3 grid-cols-2 lg:gap-8 gap-4'>
                 {shows.map(index => (
 
-                  <div>
-                    <div className='flex flex-col justify-end w-full lg:h-[350px] sm:h-[300px] h-[240px] p-4 rounded-t-xl relative' key={index._id} style={{ backgroundImage: `url(${index.image})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
+                  <div key={index}>
+                    <div className='flex flex-col justify-end w-full lg:h-[350px] sm:h-[300px] h-[240px] p-4 rounded-t-xl relative' style={{ backgroundImage: `url(${index.image})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
                       <div className="absolute inset-0 rounded-xl" style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}></div>
                       <p className='z-10 text-white text-2xl font-bold'>{index.artist}</p>
                     </div>
-                    <div key={index._id} className='flex flex-col items-center p-4 gap-4 rounded-b-xl md:text-base text-sm bg-white' >
+                    <div className='flex flex-col items-center p-4 gap-4 rounded-b-xl md:text-base text-sm bg-white' >
                       <p>Cachê: R$ {index.cache}</p>
                       <p>Data: {index.date}</p>
                       <p>Estado: {index.estado}</p>
@@ -99,4 +98,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

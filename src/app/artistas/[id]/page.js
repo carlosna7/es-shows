@@ -7,7 +7,8 @@ import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css"
 import uf from '@/components/json/uf'
 
-const page = () => {
+const Page = () => {
+
   const { spotifyToken, userId } = useContext(AuthContext)
   const [ artistData, setArtistData ] = useState([])
   const [ image, setImage ] = useState('')
@@ -139,4 +140,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

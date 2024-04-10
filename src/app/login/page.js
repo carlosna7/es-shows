@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import LoginForm from '@/components/form/LoginForm'
 import { useRouter } from 'next/navigation'
 
-const page = () => {
+const Page = () => {
   const route = useRouter()
 
   const [ token, setToken ] = useState('')
@@ -43,7 +43,7 @@ const page = () => {
   )
 }
 
-export default page
+export default Page
 
 
 
