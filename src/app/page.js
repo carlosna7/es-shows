@@ -1,5 +1,5 @@
+import ArtistsSwiper from '@/components/artists/ArtistsSwiper'
 import Link from 'next/link'
-import { FaAngleLeft, FaAngleRight } from "react-icons/fa6"
 
 export default function Home() {
 
@@ -9,32 +9,15 @@ export default function Home() {
 
         <h1 className="lg:text-4xl md:text-3xl text-xl text-center font-bold text-white">MAIS DE <span className="text-amber-400">1000 ARTISTAS</span> AO SEU ALCANCE!</h1>
 
-        <div className="flex w-full justify-between items-center gap-8">
-          <FaAngleLeft className='text-white text-5xl' />
-          <div className="xl:w-[250px] xl:h-[250px] md:w-[210px] md:h-[210px] sm:w-[150px] sm:h-[150px] w-[350px] h-[250px] ">
-            <img
-              className='w-full h-full'
-              src='/foto-1.jpg'
-            />
-          </div>
-          <div className="xl:w-[250px] xl:h-[250px] md:w-[210px] md:h-[210px] sm:w-[150px] sm:h-[150px] sm:block hidden">
-            <img
-              className='w-full h-full'
-              src='/foto-2.jpg'
-            />
-          </div>
-          <div className="xl:w-[250px] xl:h-[250px] md:w-[210px] md:h-[210px] sm:w-[150px] sm:h-[150px] sm:block hidden">
-            <img
-              className='w-full h-full'
-              src='/foto-3.jpg'
-            />
-          </div>
+        <ArtistsSwiper />
 
-          <FaAngleRight className='text-white text-5xl' />
-        </div>
-
-        <Link className='bg-amber-400 font-bold p-2' href="/artistas">VEJA MAIS ARTISTAS</Link>
+        <Link className="py-2 px-4 relative flex items-center justify-center overflow-hidden font-semibold transition duration-300 ease-out border-2 border-amber-400 group" href="/artistas">
+          <span className="absolute flex items-center justify-center w-full h-full text-amber-400 bg-transparent duration-300 -translate-x-full group-hover:translate-x-0">VEJA MAIS ARTISTAS</span>
+          <span className="absolute flex items-center justify-center w-full h-full text-black bg-amber-400 transition-all duration-300 transform group-hover:translate-x-full ease">VEJA MAIS ARTISTAS</span>
+          <span className="relative invisible">VEJA MAIS ARTISTAS</span>
+        </Link>
       </div>
     </section>
   )
 }
+

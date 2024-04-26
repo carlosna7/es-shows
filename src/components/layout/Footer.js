@@ -20,16 +20,16 @@ const Footer = () => {
         </ul>
         <div>
           <div className='flex justify-center lg:gap-4 gap-2 lg:text-2xl text-lg'>
-            <div className='rounded-full md:p-2 p-1 border-2 border-blue-700 text-blue-700 hover:bg-blue-700 hover:text-white'>
+            <div className='rounded-full md:p-2 p-1 border-2 border-blue-700 text-blue-700 hover:bg-blue-700 hover:text-white duration-300'>
               <FaFacebookF />
             </div>
-            <div className='rounded-full md:p-2 p-1 border-2 border-sky-400 text-sky-400 hover:bg-sky-400 hover:text-white'>
+            <div className='rounded-full md:p-2 p-1 border-2 border-sky-400 text-sky-400 hover:bg-sky-400 hover:text-white duration-300'>
               <FaTwitter />
             </div>
-            <div className='rounded-full md:p-2 p-1 border-2 border-pink-500 text-pink-500 hover:bg-pink-500 hover:text-white'>
+            <div className='rounded-full md:p-2 p-1 border-2 border-pink-500 text-pink-500 hover:bg-pink-500 hover:text-white duration-300'>
               <FaInstagram />
             </div>
-            <div className='rounded-full md:p-2 p-1 border-2 border-red-500 text-red-500 hover:bg-red-500 hover:text-white'>
+            <div className='rounded-full md:p-2 p-1 border-2 border-red-500 text-red-500 hover:bg-red-500 hover:text-white duration-300'>
               <FaYoutube />
             </div>
           </div>

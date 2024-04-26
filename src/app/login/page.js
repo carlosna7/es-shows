@@ -7,7 +7,8 @@ import { useRouter } from 'next/navigation'
 const Page = () => {
   const route = useRouter()
 
-  const [ token, setToken ] = useState('')
+  const [token, setToken] = useState('')
+  console.log(token)
 
   // login na API
   const loginUser = (user) => {

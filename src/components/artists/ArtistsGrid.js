@@ -2,7 +2,7 @@
 
 import { AuthContext } from '@/context/authContext'
 import Link from 'next/link'
-import React, { useContext, useEffect, useState } from 'react'
+import React, { Suspense, useContext, useEffect, useState } from 'react'
 
 const ArtistsGrid = ({ searchedArtist }) => {
   const { spotifyToken } = useContext(AuthContext)
@@ -90,41 +90,33 @@ const ArtistsGrid = ({ searchedArtist }) => {
 
   return (
     <section className='w-full'>
-      <div className='grid md:grid-cols-3 grid-cols-2 2xl:gap-8 gap-4 justify-items-center'>
-
-        {/* Artista pesquisado inserido no grid */}
-        {searchedArtist && (
-
-          <div className='flex flex-col justify-end w-full lg:h-[350px] sm:h-[300px] h-[240px] p-4 rounded-xl relative hover:scale-95 duration-300' key={searchedArtist.id} style={{ backgroundImage: `url(${searchedArtist.images[0].url})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
-            <div className="absolute inset-0 rounded-xl" style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}></div>
-
-            <Link href={`/artistas/${searchedArtist.id}`} className="z-10 flex flex-col gap-4">
-              <p className='lg:text-3xl sm:text-2xl text-xl font-bold text-white'>{searchedArtist.name}</p>
-              <p className='text-xs bg-amber-400 rounded-sm text-center font-bold sm:w-1/2 w-full'>{searchedArtist.genres[0]}</p>
-            </Link>
-          </div>
-
-        )}
-
-        {/* lista de artistas */}
-        {artistsData.slice(0, counter).map(artist => (
-
-          <div className='flex flex-col justify-end w-full lg:h-[350px] sm:h-[300px] h-[240px] p-4 rounded-xl relative hover:scale-95 duration-300' key={artist.id} style={{ backgroundImage: `url(${artist.images[0].url})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
-            <div className="absolute inset-0 rounded-xl" style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}></div>
-
-            <Link href={`/artistas/${artist.id}`} className="z-10 flex flex-col gap-4">
-              <p className='lg:text-3xl sm:text-2xl text-xl font-bold text-white'>{artist.name}</p>
-              <p className='text-xs bg-amber-400 rounded-sm text-center font-bold sm:w-1/2 w-full'>{artist.genres[0]}</p>
-            </Link>
-          </div>
-
-        ))}
-
-      </div>
-
-      <div className='flex justify-center md:pt-16 pt-8'>
-        <button onClick={incrementCounter} className='p-2 rounded-md bg-white'>Ver mais</button>
-      </div>
+      <Suspense fallback={<p>carregando</p>}>
+        <div className='grid md:grid-cols-3 grid-cols-2 2xl:gap-8 gap-4 justify-items-center'>
+          {/* Artista pesquisado inserido no grid */}
+          {searchedArtist && (
+            <div className='flex flex-col justify-end w-full lg:h-[350px] sm:h-[300px] h-[240px] p-4 rounded-xl relative hover:scale-95 duration-300' key={searchedArtist.id} style={{ backgroundImage: `url(${searchedArtist.images[0].url})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
+              <div className="absolute inset-0 rounded-xl" style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}></div>
+              <Link href={`/artistas/${searchedArtist.id}`} className="z-10 flex flex-col gap-4">
+                <p className='lg:text-3xl sm:text-2xl text-xl font-bold text-white'>{searchedArtist.name}</p>
+                <p className='text-xs bg-amber-400 rounded-sm text-center font-bold sm:w-1/2 w-full'>{searchedArtist.genres[0]}</p>
+              </Link>
+            </div>
+          )}
+          {/* lista de artistas */}
+          {artistsData.slice(0, counter).map(artist => (
+            <div className='flex flex-col justify-end w-full lg:h-[350px] sm:h-[300px] h-[240px] p-4 rounded-xl relative hover:scale-95 duration-300' key={artist.id} style={{ backgroundImage: `url(${artist.images[0].url})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
+              <div className="absolute inset-0 rounded-xl" style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}></div>
+              <Link href={`/artistas/${artist.id}`} className="z-10 flex flex-col gap-4">
+                <p className='lg:text-3xl sm:text-2xl text-xl font-bold text-white'>{artist.name}</p>
+                <p className='text-xs bg-amber-400 rounded-sm text-center font-bold sm:w-1/2 w-full'>{artist.genres[0]}</p>
+              </Link>
+            </div>
+          ))}
+        </div>
+        <div className='flex justify-center md:pt-16 pt-8'>
+          <button onClick={incrementCounter} className='p-2 rounded-md bg-white'>Ver mais</button>
+        </div>
+      </Suspense>
 
     </section>
   )

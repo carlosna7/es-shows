@@ -14,11 +14,11 @@ const Navbar = () => {
 	}
 
   return (
-    <header className='z-10 bg-zinc-900 flex justify-between 2xl:px-72 xl:px-52 lg:px-36 sm:px-20 px-8 py-6'>
+    <header className='z-10 bg-zinc-900 flex justify-between 2xl:px-72 xl:px-52 lg:px-36 sm:px-20 px-8 py-8'>
       
       <div className='flex gap-4 items-center'>
         <img 
-          className='sm:h-14 h-10'
+          className='h-12'
           src='/es-shows-logo.png'
           alt='logo'
         />
@@ -41,9 +41,9 @@ const Navbar = () => {
       {openNavbar ? (
 
         <>
-          <div className='bg-gray-100 absolute w-full right-0 top-24 flex flex-col sm:px-20 px-8 py-6'>
-            <Link href="/contratacoes">CONTRATAÇÕES</Link>
-            <Link href="/artistas">ARTISTAS</Link>
+          <div className='bg-white absolute w-full right-0 top-24 gap-4 md:hidden flex flex-col sm:px-20 px-8 py-6'>
+            <Link href="/contratacoes" className='bg-slate-800 hover:bg-slate-500 text-white p-2 rounded-md'>CONTRATAÇÕES</Link>
+            <Link href="/artistas" className='bg-slate-800 hover:bg-slate-500 text-white p-2 rounded-md'>ARTISTAS</Link>
           </div>
         </>
 

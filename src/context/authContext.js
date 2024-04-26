@@ -48,22 +48,23 @@ const AuthProvider = ({ children }) => {
 
             if(data.expired) {
 
-              console.log("Token expirou!")
+              // console.log("Token expirou!")
               localStorage.removeItem('userToken')
               setUserId(false)
 
             } else {
 
+              // console.log("Token ainda é válido!")
               const validToken = jwtDecode(userData)
               setUserId(validToken.userId)
-              console.log("Token ainda é válido!")
 
             }
           } catch(error) {
             console.error('Erro ao verificar a expiração do token:', error)
           }
         } else {
-          console.log("Token expirou!")
+          
+          // console.log("Token expirou!")
           localStorage.removeItem('userToken')
           setUserId(false)
         }

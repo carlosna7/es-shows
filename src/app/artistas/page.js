@@ -4,7 +4,6 @@ import ArtistsGrid from '@/components/artists/ArtistsGrid'
 import { AuthContext } from '@/context/authContext'
 import React, { useContext, useEffect, useState } from 'react'
 import { FaSearch } from "react-icons/fa"
-// import { HiAdjustmentsHorizontal } from "react-icons/hi2"
 
 const Page = () => {
   const { spotifyToken } = useContext(AuthContext)
@@ -71,7 +70,7 @@ const Page = () => {
   }
 
   return (
-    <section className='bg-gray-200 2xl:px-72 xl:px-52 lg:px-36 sm:px-20 px-8 md:py-16 py-8'>
+    <section className='bg-gray-200 2xl:px-72 xl:px-52 lg:px-36 sm:px-20 px-8 md:py-16 py-8' id="background-image">
 
       <div className='bg-white rounded-xl md:p-8 p-4 flex flex-col items-center gap-4'>
         <h1 className='text-lg'>Busque mais de 1000 artistas!</h1>
@@ -91,10 +90,10 @@ const Page = () => {
           </button>
         </form>
 
-
       </div>
 
       <div className='flex justify-between md:pt-16 pt-8 2xl:gap-8 gap-4'>
+        {/* filtrar artista pela inicial do nome (enviar essa inicial como parametro para atualizar o grid de acordo com a inicial selecioanda) */}
         <div className='xl:flex hidden flex-col p-4 bg-white w-[300px] h-full rounded-xl'>
           <div className='flex justify-center border-b-2 border-black pb-4 text-lg font-bold'>
             <h2>FILTROS</h2>
@@ -115,9 +114,6 @@ const Page = () => {
           </ul>
         </div>
 
-        {/* <div className='z-10 xl:hidden block fixed bottom-10 lg:right-36 sm:right-20 right-8 h-10 w-10 rounded-lg bg-amber-400'>
-          <HiAdjustmentsHorizontal className='h-full w-full p-2' />
-        </div> */}
         <ArtistsGrid searchedArtist={artistData} />
       </div>
 
