@@ -3,8 +3,8 @@
 import { useParams, useRouter } from 'next/navigation'
 import { AuthContext } from '@/context/authContext'
 import React, { useContext, useEffect, useState } from 'react'
-import DatePicker from "react-datepicker"
-import "react-datepicker/dist/react-datepicker.css"
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
 import uf from '@/components/json/uf'
 import RelatedArtists from '@/components/artists/RelatedArtists'
 import { MsgContext } from '@/context/msgContext'
@@ -62,15 +62,6 @@ const Page = () => {
   const handleSubmit = (ev) => {
     ev.preventDefault()
     const updateData = formData
-    const date = new Date(formData.date)
-
-    const day = date.getDate()
-    const month = date.getMonth() + 1
-    const year = date.getFullYear()
-
-    // formatar para dd/mm/yyyy
-    const formattedDate = `${day.toString().padStart(2, '0')}/${month.toString().padStart(2, '0')}/${year}`;
-    updateData.date = formattedDate
 
     fetch(`https://api-esshow.onrender.com/user/shows/${userId}`, {
       method: "PATCH",
@@ -125,8 +116,8 @@ const Page = () => {
             <DatePicker
               className='bg-gray-100 p-2 rounded-lg w-full'
               selected={formData.date}
-              dateFormat="dd/MM/YYYY"
-              onChange={(date) => setFormData({ ...formData, date })}
+              dateFormat="dd/MM/yyyy"
+              onChange={(date) => setFormData({ ...formData, date: date })}
             />
 
             <select name="estado" onChange={handleInputChange} className='bg-gray-100 p-2 rounded-lg'>

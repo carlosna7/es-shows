@@ -46,10 +46,10 @@ const Page = () => {
       .then((response) => response.json())
       .then((data) => {
 
-        if(data.msg) {
+        if (data.msg) {
           handleMessage(data.msg)
         }
-        if(data.error) {
+        if (data.error) {
           handleMessage(data.error)
         }
 
@@ -77,8 +77,8 @@ const Page = () => {
                       <p className='z-10 text-white text-2xl font-bold'>{index.artist}</p>
                     </div>
                     <div className='flex flex-col items-center p-4 pt-6 gap-4 rounded-b-xl md:text-base text-sm bg-white' >
-                      <p className='font-bold'>Cachê: <span className='font-normal'>{new Intl.NumberFormat('pt-BR',{ style: 'currency', currency: 'BRL' }).format(index.cache)}</span></p>
-                      <p className='font-bold'>Data: <span className='font-normal'>{index.date}</span></p>
+                      <p className='font-bold'>Cachê: <span className='font-normal'>{new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(index.cache)}</span></p>
+                      <p className='font-bold'>Data: <span className='font-normal'>{new Date(index.date).toLocaleDateString('pt-BR', {day: '2-digit', month: '2-digit', year: '2-digit'})}</span></p>
                       <p className='font-bold'>Estado: <span className='font-normal'>{index.estado}</span></p>
                       <p className='font-bold'>Cidade: <span className='font-normal'>{index.cidade}</span></p>
                       <button onClick={() => deleteShow(index._id)} className="py-2 px-4 relative flex items-center justify-center overflow-hidden font-semibold transition duration-300 ease-out border-2 border-amber-400 group" href="/artistas">

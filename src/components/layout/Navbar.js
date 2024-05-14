@@ -41,7 +41,7 @@ const Navbar = () => {
       {openNavbar ? (
 
         <>
-          <div className='bg-white absolute w-full right-0 top-24 gap-4 md:hidden flex flex-col sm:px-20 px-8 py-6'>
+          <div className='bg-white absolute w-full right-0 top-24 gap-4 md:hidden flex flex-col sm:px-20 px-8 py-6 z-10'>
             <Link href="/contratacoes" className='bg-slate-800 hover:bg-slate-500 text-white p-2 rounded-md'>CONTRATAÇÕES</Link>
             <Link href="/artistas" className='bg-slate-800 hover:bg-slate-500 text-white p-2 rounded-md'>ARTISTAS</Link>
           </div>

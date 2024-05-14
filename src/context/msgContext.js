@@ -11,8 +11,6 @@ const MsgProvider = ({ children }) => {
 
   const [ message, setMessage ] = useState(null)
 
-  console.log(message)
-
   const handleMessage = (msg) => {
     setMessage(msg)
 
