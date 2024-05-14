@@ -1,14 +1,14 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useContext } from 'react'
 import LoginForm from '@/components/form/LoginForm'
 import { useRouter } from 'next/navigation'
+import { MsgContext } from '@/context/msgContext'
 
 const Page = () => {
-  const route = useRouter()
 
-  const [token, setToken] = useState('')
-  console.log(token)
+  const route = useRouter()
+  const { handleMessage } = useContext(MsgContext)
 
   // login na API
   const loginUser = (user) => {
@@ -23,9 +23,16 @@ const Page = () => {
       .then((response) => response.json())
       .then((data) => {
 
-        setToken(data)
-        localStorage.setItem('userToken', data)
-        route.push("/")
+        if(!data.error) {
+          localStorage.setItem('userToken', data)
+          route.push("/")
+        }
+
+        if(data.error) {
+          console.log(data.error)
+          handleMessage(data.error)
+        }
+
       })
       .catch((erro) => {
         console.log(erro)

@@ -7,6 +7,7 @@ import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css"
 import uf from '@/components/json/uf'
 import RelatedArtists from '@/components/artists/RelatedArtists'
+import { MsgContext } from '@/context/msgContext'
 
 const Page = () => {
 
@@ -16,6 +17,7 @@ const Page = () => {
   const { id } = useParams()
   const estados = uf.UF
   const route = useRouter()
+  const { handleMessage } = useContext(MsgContext)
 
   if (userId === false) {
     route.push("/login")
@@ -80,7 +82,13 @@ const Page = () => {
       .then((response) => response.json())
       .then((data) => {
 
-        route.push("/contratacoes")
+        if(data.msg) {
+          handleMessage(data.msg)
+          route.push('/contratacoes')
+        }
+        if(data.error) {
+          handleMessage(data.error)
+        }
 
       })
       .catch((erro) => {

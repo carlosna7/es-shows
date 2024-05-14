@@ -2,11 +2,14 @@
 
 import React, { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '@/context/authContext'
+import { MsgContext } from '@/context/msgContext'
 import Link from 'next/link'
 
 const Page = () => {
   const [shows, setShows] = useState([])
   const { userId } = useContext(AuthContext)
+
+  const { handleMessage } = useContext(MsgContext)
 
   // requisição dos artistas contratados 
   useEffect(() => {
@@ -43,8 +46,14 @@ const Page = () => {
       .then((response) => response.json())
       .then((data) => {
 
-        setShows((prevShows) => prevShows.filter((show) => show._id !== id))
+        if(data.msg) {
+          handleMessage(data.msg)
+        }
+        if(data.error) {
+          handleMessage(data.error)
+        }
 
+        setShows((prevShows) => prevShows.filter((show) => show._id !== id))
       })
       .catch((erro) => {
         console.log(erro)
@@ -86,7 +95,7 @@ const Page = () => {
             </>
           ) : (
             <>
-              <div className='h-screen 2xl:px-72 xl:px-52 lg:px-36 sm:px-20 px-8 sm:py-16 py-8 font-bold text-xl text-white' id="background-image">
+              <div className='h-screen 2xl:px-72 xl:px-52 lg:px-36 sm:px-20 px-8 sm:py-16 py-8 font-bold text-xl text-white'>
                 <p>Por enquanto, você ainda não possui orçamento para nenhum artista. Para ver seus orçamentos, basta selecionar um artista de sua escolha e agendar seu show <Link className='text-purple-400' href="/artistas">Aqui.</Link></p>
               </div>
             </>
